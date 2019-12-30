@@ -13,6 +13,7 @@ namespace Api.Data.Repositories {
 
         public BaseRepository (MyContext context) {
             _context = context;
+            _dataset = _context.Set<T>();
         }
         
         public async Task<bool> ExistAsync(Guid id)
