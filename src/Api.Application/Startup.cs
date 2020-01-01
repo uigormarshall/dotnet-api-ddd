@@ -26,6 +26,7 @@ namespace Application
         public void ConfigureServices(IServiceCollection services)
         {
             ConfigureService.ConfigureDependeciesService(services);
+            ConfigurationRepository.ConfigureDependeciesRepository(services);
             services.AddControllers();
         }
 
