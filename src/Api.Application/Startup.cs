@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Data.Contexts;
 using CrossCutting.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,6 +29,7 @@ namespace Application
         {
             ConfigureService.ConfigureDependeciesService(services);
             ConfigurationRepository.ConfigureDependeciesRepository(services);
+            ConfigurationContext.ConfigureDependeciesContext(services);
             services.AddControllers();
         }
 
