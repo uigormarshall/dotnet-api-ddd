@@ -72,13 +72,7 @@ namespace Api.Data.Repositories {
 
         public async Task<T> SelectAsync (Guid id) {
             try {
-                var model = await _dataset.SingleOrDefaultAsync (obj => obj.Id.Equals (id));
-
-                if (model == null) return null;
-
-                _dataset.Remove (model);
-
-                await _context.SaveChangesAsync ();
+                var model = await _dataset.FirstOrDefaultAsync (obj => obj.Id.Equals (id));
                 return model;
             } catch (Exception e) {
                 throw e;
@@ -88,8 +82,6 @@ namespace Api.Data.Repositories {
         public async Task<IEnumerable<T>> SelectAsync () {
             try {
                 var model = await _dataset.ToListAsync ();
-                if (model == null) return null;
-                await _context.SaveChangesAsync ();
                 return model;
             } catch (Exception e) {
                 throw e;
