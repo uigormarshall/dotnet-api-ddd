@@ -9,6 +9,12 @@ namespace Application.Controllers {
     [ApiController]
     [Route ("api/v1/users")]
     public class UsersController : ControllerBase {
+        private readonly IUserService _userService;
+
+        public UsersController(IUserService userService)
+        {
+            _userService = userService;
+        }
         [HttpGet]
         public async Task<ActionResult> GetAll ([FromServices] IUserService service )
         {
@@ -25,12 +31,12 @@ namespace Application.Controllers {
         
         [HttpGet]
         [Route ("{id}")]
-        public async Task<ActionResult> Get (Guid id, [FromServices] IUserService service )
+        public async Task<ActionResult> Get (Guid id)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             try
             {
-                return Ok(await service.Get(id));
+                return Ok(await _userService.Get(id));
             }
             catch (ArgumentException e)
             {
@@ -39,12 +45,12 @@ namespace Application.Controllers {
         }
         
         [HttpPost]
-        public async Task<ActionResult> Post (UserEntity user, [FromServices] IUserService service )
+        public async Task<ActionResult> Post (UserEntity user)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             try
             {
-                return Ok(await service.Post(user));
+                return Ok(await _userService.Post(user));
             }
             catch (ArgumentException e)
             {
@@ -52,14 +58,14 @@ namespace Application.Controllers {
             }
         }
         [HttpPut]
-        public async Task<ActionResult> Update (UserEntity user, [FromServices] IUserService service )
+        public async Task<ActionResult> Update (UserEntity user)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             try
             {
-                var result = await service.Put(user);
+                var result = await _userService.Put(user);
                 if(result == null) return new BadRequestResult(); 
-                return Ok(await service.Put(user));
+                return Ok(await _userService.Put(user));
             }
             catch (ArgumentException e)
             {
@@ -68,12 +74,12 @@ namespace Application.Controllers {
         }
         [HttpDelete]
         [Route ("{id}")]
-        public async Task<ActionResult> Delete (Guid id, [FromServices] IUserService service )
+        public async Task<ActionResult> Delete (Guid id)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             try
             {
-                return Ok(await service.Delete(id));
+                return Ok(await _userService.Delete(id));
             }
             catch (ArgumentException e)
             {
