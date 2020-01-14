@@ -4,6 +4,6 @@ namespace Domain.Security
     {
         public string Audience { get; set; }
         public string Issuer { get; set; }
-        public int Seconcs { get; set; }
+        public int Seconds { get; set; }
     }
 }

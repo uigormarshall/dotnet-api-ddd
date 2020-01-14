@@ -6,6 +6,6 @@ namespace Api.Domain.Interfaces.Services.User
 {
     public interface ILoginService
     {
-         Task<UserEntity> FindByLogin(LoginDTO user);
+         Task<object> FindByLogin(LoginDTO user);
     }
 }
